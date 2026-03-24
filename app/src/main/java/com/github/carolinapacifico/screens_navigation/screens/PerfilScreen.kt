@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun PerfilScreen(modifier: Modifier = Modifier, navController: NavController) {
+fun PerfilScreen(modifier: Modifier = Modifier, navController: NavController, nome: String) {
     Box(
         modifier = modifier
             .fillMaxSize()
