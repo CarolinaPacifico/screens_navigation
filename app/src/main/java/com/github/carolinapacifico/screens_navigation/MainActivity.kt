@@ -13,6 +13,7 @@ import com.github.carolinapacifico.screens_navigation.ui.theme.Screens_navigatio
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.github.carolinapacifico.screens_navigation.screens.MenuScreen
 import com.github.carolinapacifico.screens_navigation.screens.PedidosScreen
 import com.github.carolinapacifico.screens_navigation.screens.PerfilScreen
@@ -38,12 +39,21 @@ class MainActivity : ComponentActivity() {
                         composable(route = "menu") {
                             MenuScreen(modifier = Modifier.padding(innerPadding), navController)
                         }
-                        composable(route = "pedidos") {
-                            PedidosScreen(modifier = Modifier.padding(innerPadding), navController)
+                        composable(
+                            route = "pedidos?cliente={cliente}",
+                            arguments = listOf(navArgument("cliente") {
+                                defaultValue = "Cliente Genérico"
+                            })
+                        ) {
+                            PedidosScreen(modifier = Modifier.padding(innerPadding), navController, it.arguments?.getString("cliente"))
                         }
                         composable(route = "perfil/{nome}") {
                             val nome: String? = it.arguments?.getString("nome", "Usuário Genérico")
-                            PerfilScreen(modifier = Modifier.padding(innerPadding), navController, nome!!)
+                            PerfilScreen(
+                                modifier = Modifier.padding(innerPadding),
+                                navController,
+                                nome!!
+                            )
                         }
                     }
                 }
